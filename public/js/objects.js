@@ -1,52 +1,51 @@
+var selections = {'#hotel-choices': hotel, '#restaurant-choices':restaurant, '#activity-choices': activity};
+
 $(document).ready(function() {
-    var selections = {'#hotel-choices': hotel, '#restaurant-choices':restaurant, '#activity-choices': activity};
-    console.log(Object.keys(selections));
+    initializeMap();
+
     var keys = Object.keys(selections);
     for (var prop in keys) {
-    	console.log(keys[prop])
     	var currentProp = keys[prop];
     	if(selections.hasOwnProperty(currentProp)){
     		var mySelect = $(currentProp)
-    		console.log(currentProp);
 	        $.each(selections[currentProp], function(val, text) {
 	           mySelect.append(
 	               $('<option></option>').val(val).html(text.name)
-
 	            )
-
 	        });
        }
     }
 });
 
+$(".btn-primary").click(function() {
 
+   //console.log( "Handler for .click() called." );
+   var $category = $(this).closest( "div" ).find("select").attr('id');
+   var $result = $( "#"+$category+" option:selected" ).text();
+   $('#'+$category.split("-")[0]).append($('<div class="itinerary-item"><span class="title">'+$result+'</span><button class="btn btn-xs btn-danger remove btn-circle">x</button></div>'));
+   // console.log($result)
+   // console.log($category)
+   var options = selections['#'+$category]
 
-// $(".btn-circle").click(function() {
-//        console.log( "Handler for .click() called." );
-//        var $category = $(this).closest( "div" ).find("select").attr('id');
-//        var $cat =$category.split("-")[0];
-//        var $result = $( "#"+$category+" option:selected" ).text();
-//        // console.log(hotels[$('#hotel-choices').val()]);
-        
-//        console.log($result+"s");
-//        $('#'+$category.split("-")[0]).append($('<p></p>').html($result));
+   for (var i = 0; i < options.length; i++) {
+       if (options[i].name === $result){
+           locArr = options[i].place.location;
+           drawMarker($category.split('-')[0], locArr)
+           //onsole.log(locArr)
+           break
+       }
+   }
 
-//        for (var i = 0; i < $cat.length; i++) {
-//            if ($cat[i].name === $result){
-//                locArr = $cat[i].place.location;
-//                console.log(locArr);
-//                break;
+   });
 
-//            }
-//        }
+$(document).on('click', '.remove', function(){
+    // console.log($(this).closest('div').find("span").empty());
+    console.log($(this).closest('div').empty());
+});
 
-//    });
-
-
-// //value
-// $('#dropDownId').val();
-// //text
-// $('#dropDownId :selected').text();
-
-
-// $('#genreList').append('<li><a href="#" onclick="searchGenres(\'' + genreName + '\')
+$('#day-add').click(function(){
+    console.log($(this).closest('div').last().text())
+    $('<button class="btn btn-circle day-btn">!!</button>').insertBefore($(this))
+    // $(this).closest('div').append('<button class="btn btn-circle day-btn">!!</button>')
+    // console.log('works')
+});
