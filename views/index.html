@@ -59,7 +59,7 @@
         </div>
         <div class="panel-body" id="itinerary">
           <div>
-            <h4>My Hotel</h4>
+            <h4 id="hotel">My Hotel</h4>
             <ul class="list-group">
               <div class="itinerary-item">
                 <span class="title">  </span>
@@ -68,7 +68,7 @@
             </ul>
           </div>
           <div>
-            <h4>My Restaurants</h4>
+            <h4 id="restaurant">My Restaurants</h4>
             <ul class="list-group">
               <div class="itinerary-item">
                 <span class="title"> </span>
@@ -77,7 +77,7 @@
             </ul>
           </div>
           <div>
-            <h4>My Activities</h4>
+            <h4 id="activity">My Activities</h4>
             <ul class="list-group">
               <div class="itinerary-item">
                 <span class="title"> </span>
@@ -92,8 +92,8 @@
 </div>
 
 <script>
-  var hotels = {{ hotels | dump | safe }};
-  var restaurants = {{ restaurants | dump | safe }};
-  var activities = {{ activities | dump | safe }};
+  var hotel = {{ hotels | dump | safe }};
+  var restaurant = {{ restaurants | dump | safe }};
+  var activity = {{ activities | dump | safe }};
 </script>
 {% endblock %}

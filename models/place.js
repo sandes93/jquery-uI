@@ -9,4 +9,5 @@ var Place = db.define('place', {
   location: Sequelize.ARRAY(Sequelize.DOUBLE)
 });
 
+
 module.exports = Place;
